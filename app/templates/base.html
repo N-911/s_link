@@ -44,7 +44,7 @@
 
             <p>
                 {{ form.short_link.label }}<br>
-                <a>http://127.0.0.1:5000/{{link.short_link}}</a>
+                <a>https://s-link.herokuapp.com/{{link.short_link}}</a>
                 {% for error in form.short_link.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
