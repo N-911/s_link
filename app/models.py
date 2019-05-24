@@ -6,11 +6,13 @@ from app import login
 import random
 import string
 
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
 
-class User(UserMixin,db.Model):
+
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -26,21 +28,19 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+
 class Url(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url_link = db.Column(db.String(140))
     short_link = db.Column(db.String(40), unique=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    r_count = db.Column(db.Integer, default=0 )
+    r_count = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return 'https://s-link.herokuapp.com/{}'.format(self.short_link)
-        #return '<Url link -{}, shorten link -{}>'.format(self.url_link, self.short_link)
 
     def create_short_link(self, url_link):
         s_h = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in
         range(random.randrange(5, 8)))
-
         self. short_link = s_h
-

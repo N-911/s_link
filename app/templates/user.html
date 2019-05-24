@@ -5,6 +5,7 @@
                 {% else %}
                 <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
                 <a href="{{ url_for('logout') }}">Logout</a>
+                <a href="{{ url_for('stat') }}">Statistics</a>
                 {% endif %}
             </div>
 
@@ -30,7 +31,7 @@
     {% for u in urls %}
         <tr>
             <td>{{ u.url_link}} </td>
-            <td>http://127.0.0.1:5000/{{u.short_link}} </td>
+            <td>https://s-link.herokuapp.com/{{u.short_link}} </td>
             <td>{{u.r_count}} </td>
         </tr>
     {% endfor %}
