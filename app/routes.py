@@ -4,25 +4,26 @@ from app.forms import LoginForm, UrlForm, RegistrationForm
 from flask_login import login_required, current_user, login_user, logout_user
 from app.models import User, Url
 from app import db
-#import clipboard
-import klembord
+import re
 
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
-# @login_required                            #no acsses for anonimous users
+# @login_required                                             #no acsses for anonimous users
 def index():
     form = UrlForm()
+    link = Url()
     if form.validate_on_submit():
         if form.submit.data:
-            generate_short_link()
+            tmp = form.url_link.data
+            if re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', tmp):
+                generate_short_link()
+            else:
+                flash('Invalid url')
+                return render_template('index.html', form=form, link=link)
         elif form.submit2.data:
             pass
     link = Url.query.filter_by(url_link=form.url_link.data).all()
-    if form.validate_on_submit():
-        if form.submit2.data:
-            klembord.init()
-            klembord.set_text(str(link[-1]))
     return render_template('index.html', form=form, link=link, )
 
 

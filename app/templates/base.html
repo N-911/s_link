@@ -39,7 +39,7 @@
             <p>
                 {{ form.short_link.label }}<br>
 
-                <a>{{link[-1]}}  {{ form.submit2() }}</a>
+                <a>{{link[-1]}}</a>
                 {% for error in form.short_link.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
