@@ -1,22 +1,15 @@
     <html>
-        <head>
-            {% if title %}
-            <title>{{ title }} – Flask App</title>
-            {% else %}
-            <title>Flask App</title>
-            {% endif %}
-        </head>
         <body>
             <div>
-                <h>Urlshortener:</h>
                 <a href="{{ url_for('index') }}">Home</a>
                 {% if current_user.is_anonymous %}
                 <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('stat') }}">Statistics</a>
                 {% else %}
                 <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
                 <a href="{{ url_for('logout') }}">Logout</a>
-                {% endif %}
 
+                {% endif %}
             </div>
 
 
@@ -26,7 +19,7 @@
                     {% if current_user.is_anonymous %}
                     <h1></h1>
                     {% else %}
-                    <p>Hi, {{ current_user.username }}!</p>
+                    <h1>Hi, {{ current_user.username }}!</h1>
                     {% endif %}
             {% endblock %}
 
@@ -44,7 +37,8 @@
 
             <p>
                 {{ form.short_link.label }}<br>
-                <a>https://s-link.herokuapp.com/{{link.short_link}}</a>
+
+                <a>{{link[-1]}}  {{ form.submit2() }}</a>
                 {% for error in form.short_link.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}

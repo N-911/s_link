@@ -1,16 +1,18 @@
+
             <div>
                 <a href="{{ url_for('index') }}">Home</a>
                 {% if current_user.is_anonymous %}
                 <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('stat') }}">Statistics</a>
                 {% else %}
                 <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
                 <a href="{{ url_for('logout') }}">Logout</a>
+
                 {% endif %}
             </div>
 
-
 {% block content %}
-    <h1>User: {{ user.username }}</h1>
+    <h1>Statistics for redirect</h1>
     <table>
      <style>
      th, td {
@@ -23,8 +25,8 @@
      }
      </style>
         <tr>
-            <th>User link</th>
-            <th>Short link</th>
+            <th>user link</th>
+            <th>short link</th>
             <th>number of clicks on the link</th>
         </tr>
     {% for u in urls %}

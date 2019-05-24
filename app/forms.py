@@ -14,6 +14,7 @@ class LoginForm(FlaskForm):
 class UrlForm(FlaskForm):
     url_link = StringField('User link',validators=[DataRequired()])
     submit = SubmitField('Create link')
+    submit2 = SubmitField('Copy to clipboard ')
     short_link = StringField('Short link')
 
 

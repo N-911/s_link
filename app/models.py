@@ -29,13 +29,14 @@ class User(UserMixin,db.Model):
 class Url(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url_link = db.Column(db.String(140))
-    short_link = db.Column(db.String(40))
+    short_link = db.Column(db.String(40), unique=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    redir_count=(db.Integer)
+    r_count = db.Column(db.Integer, default=0 )
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<Url link -{}, shorten link -{}>'.format(self.url_link, self.short_link)
+        return 'https://s-link.herokuapp.com/{}'.format(self.short_link)
+        #return '<Url link -{}, shorten link -{}>'.format(self.url_link, self.short_link)
 
     def create_short_link(self, url_link):
         s_h = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in
