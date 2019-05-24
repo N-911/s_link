@@ -37,10 +37,11 @@ class Url(db.Model):
     r_count = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+
     def __repr__(self):
         return 'https://s-link.herokuapp.com/{}'.format(self.short_link)
 
+
     def create_short_link(self, url_link):
-        s_h = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in
-        range(random.randrange(5, 8)))
+        s_h = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in range(random.randrange(5, 8)))
         self. short_link = s_h

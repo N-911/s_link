@@ -1,12 +1,10 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
 from app.forms import LoginForm, UrlForm, RegistrationForm
-from flask_login import login_required, current_user, login_user,logout_user
+from flask_login import login_required, current_user, login_user, logout_user
 from app.models import User, Url
 from app import db
-from flask import request
-from werkzeug.urls import url_parse
-import pyperclip
+import clipboard
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -17,11 +15,13 @@ def index():
     if form.validate_on_submit():
         if form.submit.data:
             generate_short_link()
+        elif form.submit2.data:
+            pass
     link = Url.query.filter_by(url_link=form.url_link.data).all()
     if form.validate_on_submit():
         if form.submit2.data:
-            pyperclip.copy(str(link[-1]))
-    return render_template('index.html', title='Home', form=form, link=link, )
+            clipboard.copy(str(link[-1]))
+    return render_template('index.html', form=form, link=link, )
 
 
 def generate_short_link():
