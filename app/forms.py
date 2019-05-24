@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo,URL
 from app.models import User, Url
-from app import db
+
 
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
@@ -12,9 +12,8 @@ class LoginForm(FlaskForm):
 
 
 class UrlForm(FlaskForm):
-    url_link = StringField('User link',validators=[DataRequired()])
+    url_link = StringField('User link', validators=[DataRequired()])
     submit = SubmitField('Create link')
-    submit2 = SubmitField('Copy to clipboard ')
     short_link = StringField('Short link')
 
 

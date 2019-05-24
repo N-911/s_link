@@ -9,7 +9,7 @@ import re
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
-# @login_required                                             #no acsses for anonimous users
+# @login_required                                  #no acsses for anonimous users
 def index():
     form = UrlForm()
     link = Url()
@@ -63,7 +63,7 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
+# страница регистрации
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -78,7 +78,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-
+# страница пользователя
 @app.route('/user/<username>')
 @login_required
 def user(username):
@@ -100,6 +100,8 @@ def short_link_redirect(short_link):
     except:
         return render_template('index.html')
 
+
+# сайт статистики
 @app.route('/stat', methods=['GET', 'POST'])
 def stat():
     urls = Url.query.all()
