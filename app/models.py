@@ -40,7 +40,11 @@ class Url(db.Model):
     def __repr__(self):
         return 'https://s-link.herokuapp.com/{}'.format(self.short_link)
 
+    # функция генерации short_link
     def create_short_link(self, url_link):
-        short_link = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits)
-        for _ in range(random.randrange(5, 8)))
-        self. short_link = short_link
+        while True:
+            short_link = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits)
+                                 for _ in range(random.randrange(5, 8)))
+            if Url.query.filter_by(short_link=short_link).first() is None:
+                self.short_link = short_link
+                break

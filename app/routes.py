@@ -63,6 +63,7 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
 # страница регистрации
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -77,6 +78,7 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
 
 # страница пользователя
 @app.route('/user/<username>')
