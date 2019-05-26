@@ -1,10 +1,9 @@
-<html>
-    <div>
+ <div>
         <a href="{{ url_for('index') }}">Home</a>
         <a href="{{ url_for('login') }}">Login</a>
         <a href="{{ url_for('stat') }}">Statistics</a>
         <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
-    </div>
+</div>
 
     <h1>Log in</h1>
     <form action="" method="post" novalidate>
@@ -15,15 +14,27 @@
             {% for error in form.username.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="notification is-info">
+                        <span style="color: red;">[{{ messages[0] }}]</span>
+                    </div>
+                {% endif %}
+            {% endwith %}
+            </p>
+            <p>
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}
             {% for error in form.password.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="notification is-info">
+                        <span style="color: red;">[{{ messages[0] }}]</span>
+                    </div>
+                {% endif %}
+            {% endwith %}
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
     </form>
-</html>
